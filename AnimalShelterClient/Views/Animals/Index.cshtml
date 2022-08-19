@@ -1,0 +1,29 @@
+<h1>All Animals:</h1>
+
+ <div>
+        @using (Html.BeginForm("Index", "Animals", FormMethod.Get))
+        {
+          <div class="d-flex" role="search">
+            @Html.TextBox("SearchString", null, new { type="search", placeholder = "Search", @class="form-control me-2"})
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
+        }
+    </div>
+
+<ol>
+@foreach (Animal animal in Model)
+{
+    <ul>
+        <li>ID: @animal.AnimalId</li>
+        <li>Name: @animal.Name</li>
+        <li>Species: @Html.ActionLink($"{animal.Species}", "Species", new { species = animal.Species})</li>
+        <li>Age: @animal.Age</li>
+        <li>Gender: @Html.ActionLink($"{animal.Gender}", "Gender", new { gender = animal.Gender})</li>
+        <li>Breed: @animal.Breed</li>
+    </ul>
+    <a href="/Animals/Details/@(animal.AnimalId)"><p>View Details</p></a>
+    <br>
+
+}
+
+</ol>
